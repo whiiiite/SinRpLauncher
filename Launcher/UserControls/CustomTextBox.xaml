@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="Launcher.CustomTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Launcher"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="CaretColor" Color="Gray"/>
+
+        <Style x:Key="CanvasStyle" TargetType="TextBox">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="Transparent" Offset="0"/>
+                        <GradientStop Color="Transparent" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard >
+                        <Storyboard >
+                            <DoubleAnimation Storyboard.TargetProperty="Background.GradientStops[0].Offset" From="0" To="1" Duration="0:0:0.5"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="MouseLeave" >
+                    <BeginStoryboard >
+                        <Storyboard >
+                            <DoubleAnimation Storyboard.TargetProperty="Background.GradientStops[0].Offset" From="1" To="0" Duration="0:0:0.5"></DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <TextBox x:Name="MainTextBox"  Style="{DynamicResource CanvasStyle}"
+                BorderBrush="Transparent"
+                BorderThickness="0"
+                FontFamily="Gesta" 
+                FontSize="15" 
+                AcceptsReturn="True" 
+                TextWrapping="Wrap"
+                CaretBrush="Transparent" 
+                Padding="0"
+                Margin="0"
+                SelectionChanged="MainTextBox_SelectionChanged"
+                TextChanged="MainTextBox_TextChanged"
+                GotKeyboardFocus="MainTextBox_GotKeyboardFocus">
+        </TextBox>
+        <Canvas>
+            <Border x:Name="Caret" 
+                Visibility="Collapsed"
+                Canvas.Left="0" 
+                Canvas.Top="0" 
+                Width="5" 
+                Height="15" 
+                Background="{DynamicResource CaretColor}">
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard  x:Name="CaretStoryBoard" 
+                                         RepeatBehavior="Forever">
+                                <ColorAnimationUsingKeyFrames 
+                                        Storyboard.TargetProperty="Background.Color"
+                                        Duration="0:0:0:1"
+                                        FillBehavior="HoldEnd">
+                                    <DiscreteColorKeyFrame KeyTime="0:0:0.750" 
+                        Value="Transparent" />
+                                    <DiscreteColorKeyFrame KeyTime="0:0:0.000" 
+                        Value="Gray"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>
+            </Border>
+        </Canvas>
+    </Grid>
+</UserControl>

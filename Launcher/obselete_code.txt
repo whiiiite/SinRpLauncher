@@ -1,0 +1,902 @@
+//ColorAnimation? ca;
+
+        //#region colors
+        //private Color? LightButtonsColor = (Color?)Utils.GetColorConverter().ConvertFrom("#e0dcdc");
+
+        //private Color? MainDarkColor = (Color?)Utils.GetColorConverter().ConvertFrom("#14161a");
+        //private Color? MainLightColor = (Color?)Utils.GetColorConverter().ConvertFrom("#ededed");
+
+        //private Color FromDarkButtonForegroundColor = Colors.White;
+
+        //private Color? FromLightColorNavButton = (Color?)Utils.GetColorConverter().ConvertFrom("#e0dcdc");
+        //private Color? ToLightColorNavButton = (Color?)Utils.GetColorConverter().ConvertFrom("#cfcfcf");
+
+        //private Color? DarkButtonsColor = (Color?)Utils.GetColorConverter().ConvertFrom("#1A1E22");
+        //private Color? ToDarkColorNavButton = (Color?)Utils.GetColorConverter().ConvertFrom("#383838");
+
+        //private Color? LightTextBlockColor = (Color?)Colors.Black;
+        //private Color? DarkTextBlockColor = (Color?)Colors.White;
+
+        //private SolidColorBrush LightCstmToggleButtonBG = Brushes.Black;
+        //private SolidColorBrush DarkCstmToggleButtonBG = Brushes.White;
+
+        //private SolidColorBrush DarkCstmTglCaret = Brushes.LightGray;
+        //private SolidColorBrush LightCstmTglCaret = Brushes.White;
+
+        //private Color DarkLabelColor = Colors.White;
+        //private Color LightLabelColor = Colors.Black;
+
+        //private readonly SolidColorBrush TextBoxFGLightThemeColor = Brushes.Black; // text color of text box when is a light theme
+        //private readonly SolidColorBrush TextBoxFGDarkThemeColor = Brushes.White; // text color of text box when is a dark theme
+        //private readonly SolidColorBrush BorderLightBrush = Brushes.White;
+        //private readonly SolidColorBrush? BorderDarkBrush = (SolidColorBrush?)Utils.GetBrushConverter().ConvertFrom("#424242");
+
+        //private readonly TimeSpan MainAnimTime = TimeSpan.FromSeconds(0.2);
+        //private readonly TimeSpan ButtonsMouseEnterAnimTime = TimeSpan.FromSeconds(0.2);
+        //private readonly TimeSpan ButtonsMouseLeaveAnimTime = TimeSpan.FromSeconds(0.2);
+        //private readonly TimeSpan TextBoxMouseEnterAnimTime = TimeSpan.FromSeconds(0.5);
+        //private readonly TimeSpan TextBoxMouseLeaveAnimTime = TimeSpan.FromSeconds(0.5);
+
+        ///// <summary>
+        ///// // background for textbox to switch to dark theme
+        ///// </summary>
+        ///// <returns></returns>
+        //private LinearGradientBrush DarkTextBoxGradient()
+        //{
+        //    Color fc = (Color)Utils.GetColorConverter().ConvertFrom("#202427"); // first color
+        //    Color sc = (Color)Utils.GetColorConverter().ConvertFrom("#3d3d3d"); // second color
+        //    return TextBoxGradientBrush(fc, sc);
+        //}
+
+        ///// <summary>
+        ///// background for textbox to switch to light theme
+        ///// </summary>
+        ///// <returns></returns>
+        //private LinearGradientBrush LightTextBoxGradient()
+        //{
+        //    Color fc = (Color)Utils.GetColorConverter().ConvertFrom("#cfcfcf"); // first color
+        //    Color sc = (Color)Utils.GetColorConverter().ConvertFrom("#e6e6e6"); // second color
+        //    return TextBoxGradientBrush(fc, sc);
+        //}
+
+        ///// <summary>
+        ///// general method for construct gradient in different 2 colors
+        ///// </summary>
+        ///// <param name="fc"></param>
+        ///// <param name="sc"></param>
+        ///// <returns></returns>
+        //private LinearGradientBrush TextBoxGradientBrush(Color fc, Color sc)
+        //{
+        //    LinearGradientBrush gb = new LinearGradientBrush();
+        //    gb.StartPoint = new Point(0, 0);
+        //    gb.EndPoint = new Point(1, 1);
+
+        //    gb.GradientStops.Add(new GradientStop(fc, 0));
+        //    gb.GradientStops.Add(new GradientStop(sc, 1));
+        //    return gb;
+        //}
+        //#endregion
+
+
+
+        //#region set theme to window
+        ///// <summary>
+        ///// Method for set light theme to window (grids and other controls)
+        ///// </summary>
+        ///// <param name="w"></param>
+        //public void SetLightThemeToWindow(Window w)
+        //{
+        //    ca = new ColorAnimation();
+        //    ca.From = MainDarkColor;
+        //    ca.To = MainLightColor;
+        //    ca.Duration = MainAnimTime;
+
+        //    foreach (Grid control in Utils.FindVisualChilds<Grid>(w))
+        //    {
+        //        // if is main grid set it to light colors
+        //        // we dont need set all grids to light, because all they is transparent 
+        //        if (control.Name == "MainGrid")
+        //        {
+        //            ca.To = MainLightColor;
+        //            PropertyPath colorTargetPath = new PropertyPath("(Grid.Background).(SolidColorBrush.Color)");
+        //            Storyboard ColorChangeStory = new Storyboard();
+        //            Storyboard.SetTarget(ca, control);
+        //            Storyboard.SetTargetProperty(ca, colorTargetPath);
+        //            ColorChangeStory.Children.Add(ca);
+        //            ColorChangeStory.Begin();
+        //        }
+
+        //        if (control.Name == "CTglGrid") // skeep toggle themes button
+        //            continue;
+
+        //        foreach (var item in control.Children)
+        //        {
+        //            DetectAndSetLightThemeToControl(item);
+        //        }
+        //    }
+        //}
+
+
+        ///// <summary>
+        ///// Method for set dark theme to window (grids and other controls)
+        ///// </summary>
+        ///// <param name="w"></param>
+        //public void SetDarkThemeToWindow(Window w)
+        //{
+        //    ca = new ColorAnimation();
+        //    ca.From = MainLightColor;
+        //    ca.To = MainDarkColor;
+        //    ca.Duration = MainAnimTime;
+
+        //    foreach (Grid control in Utils.FindVisualChilds<Grid>(w))
+        //    {
+        //        if (control.Name == "MainGrid")
+        //        {
+        //            ca.To = MainDarkColor;
+        //            PropertyPath colorTargetPath = new PropertyPath("(Grid.Background).(SolidColorBrush.Color)");
+        //            Storyboard ColorChangeStory = new Storyboard();
+        //            Storyboard.SetTarget(ca, control);
+        //            Storyboard.SetTargetProperty(ca, colorTargetPath);
+        //            ColorChangeStory.Children.Add(ca);
+        //            ColorChangeStory.Begin();
+        //        }
+
+        //        if (control.Name == "CTglGrid") // skeep toggle themes button
+        //            continue;
+
+        //        foreach (var item in control.Children)
+        //        {
+        //            DetectAndSetDarkThemeToControl(item);
+        //        }
+        //    }
+        //}
+        //#endregion
+
+
+
+        //#region set light theme to controls
+        ///// <summary>
+        ///// method check item that got it. And for each item set theme that need for this
+        ///// </summary>
+        ///// <param name="item"></param>
+        //private void DetectAndSetLightThemeToControl(object item)
+        //{
+        //    // check whats type item is and set light colors for this 
+        //    // UC - means UnColarable its do not need be colored or change theme
+
+        //    string Tag = (item as FrameworkElement)?.Tag as string ?? ""; // tag of element
+
+        //    if (!Tag.ToLower().Contains("uc"))
+        //    {
+        //        if (item is Button)
+        //        {
+        //            SetThemeBackgroundToControl(item, "Button", MainDarkColor, LightButtonsColor);
+        //            SetThemeForegroundToControl(item, "Button", FromDarkButtonForegroundColor, Colors.Black);
+        //        }
+
+        //        if (item is Label)
+        //        {
+        //            SetThemeForegroundToControl(item, "Label", DarkLabelColor, LightLabelColor);
+        //        }
+
+        //        if (item is TextBlock)
+        //        {
+        //            SetThemeForegroundToControl(item, "TextBlock", DarkTextBlockColor, LightTextBlockColor);
+        //        }
+
+        //        if (item is TextBox)
+        //        {
+        //            TextBox tbox = (TextBox)item;
+
+        //            tbox.Background = LightTextBoxGradient();
+        //            tbox.Foreground = TextBoxFGLightThemeColor;
+        //            tbox.CaretBrush = TextBoxFGLightThemeColor;
+        //        }
+
+        //        if (item is ComboBox)
+        //        {
+        //        }
+
+        //        if (item is Border)
+        //        {
+        //            Border brdItem = (Border)item;
+
+        //            brdItem.Background = BorderLightBrush;
+
+        //            // border is a part of template PROGRESS BAR as background and foregound
+        //            if (Tag.ToLower().Contains("prgrsbg"))
+        //                brdItem.Background = Brushes.Black;
+        //            if (Tag.ToLower().Contains("prgrsfg"))
+        //                brdItem.Background = Brushes.Black;
+        //        }
+
+        //        if (item is CircProgressBar)
+        //        {
+        //            CircProgressBar cpbItem = (CircProgressBar)item;
+        //            cpbItem.ProgressLineColor = Brushes.Black;
+        //        }
+
+        //        if (item is Rectangle) // rectangle is a part of template PROGRESS BAR as foreground 
+        //        {
+        //        }
+
+        //        if (item is CToggleButton)
+        //        {
+        //            CToggleButton btnItem = (CToggleButton)item;
+        //            btnItem.BackgroundP = LightCstmToggleButtonBG;
+        //            btnItem.CaretColor = LightCstmTglCaret;
+        //        }
+        //    }
+
+        //}
+        //#endregion
+
+
+
+        //#region set dark theme to controls
+        ///// <summary>
+        ///// method check item that got it. And for each item set theme that need for this
+        ///// </summary>
+        ///// <param name="item"></param>
+        //private void DetectAndSetDarkThemeToControl(object item)
+        //{
+        //    // check whats type item is and set dark colors for this 
+        //    // UC - means UnColarable its do not need be colored or change theme
+
+        //    string Tag = (item as FrameworkElement)?.Tag as string ?? ""; // tag of element
+
+        //    if (!Tag.ToLower().Contains("uc"))
+        //    {
+        //        if (item is Button)
+        //        {
+        //            SetThemeBackgroundToControl(item, "Button", LightButtonsColor, DarkButtonsColor);
+        //            SetThemeForegroundToControl(item, "Button", Colors.Black, FromDarkButtonForegroundColor);
+        //        }
+
+        //        if (item is Label)
+        //        {
+        //            SetThemeForegroundToControl(item, "Label", LightLabelColor, DarkLabelColor);
+        //        }
+
+        //        if (item is TextBlock)
+        //        {
+        //            SetThemeForegroundToControl(item, "TextBlock", LightTextBlockColor, DarkTextBlockColor);
+        //        }
+
+        //        if (item is TextBox)
+        //        {
+        //            TextBox tbox = (TextBox)item;
+
+        //            tbox.Background = DarkTextBoxGradient();
+        //            tbox.Foreground = TextBoxFGDarkThemeColor;
+        //            tbox.CaretBrush = TextBoxFGDarkThemeColor;
+        //        }
+
+        //        if (item is ComboBox)
+        //        {
+        //        }
+
+        //        if (item is Border)
+        //        {
+        //            Border brdItem = (Border)item;
+        //            brdItem.Background = BorderDarkBrush;
+
+        //            // border is a part of template PROGRESS BAR as background and foregound
+        //            if (Tag.ToLower().Contains("prgrsbg"))
+        //                brdItem.Background = Brushes.White;
+        //            if (Tag.ToLower().Contains("prgrsfg"))
+        //                brdItem.Background = Brushes.Black;
+        //        }
+
+        //        if (item is CircProgressBar)
+        //        {
+        //            CircProgressBar cpbItem = (CircProgressBar)item;
+        //            cpbItem.ProgressLineColor = Brushes.White;
+        //        }
+
+        //        if (item is Rectangle)
+        //        {
+        //        }
+
+        //        if (item is CToggleButton)
+        //        {
+        //            CToggleButton btnItem = (CToggleButton)item;
+        //            btnItem.BackgroundP = DarkCstmToggleButtonBG;
+        //            btnItem.CaretColor = DarkCstmTglCaret;
+        //        }
+        //    }
+
+        //}
+        //#endregion
+
+
+
+        //#region set colors to control with animate
+        ///// <summary>
+        ///// set foreground to control with animate
+        ///// </summary>
+        ///// <param name="item"></param>
+        ///// <param name="type"></param>
+        ///// <param name="FromColor"></param>
+        ///// <param name="ToColor"></param>
+        //private void SetThemeForegroundToControl(object item, string type, Color? FromColor, Color? ToColor)
+        //{
+        //    ColorAnimation caFG = new ColorAnimation();
+        //    caFG.From = FromColor;
+        //    caFG.To = ToColor;
+        //    caFG.Duration = MainAnimTime;
+        //    PropertyPath colorTargetPathFG = new PropertyPath($"({type}.Foreground).(SolidColorBrush.Color)");
+        //    Storyboard ColorChangeStoryFG = new Storyboard();
+        //    Storyboard.SetTarget(caFG, item as DependencyObject);
+        //    Storyboard.SetTargetProperty(caFG, colorTargetPathFG);
+        //    ColorChangeStoryFG.Children.Add(caFG);
+        //    ColorChangeStoryFG.Begin();
+        //}
+
+
+        ///// <summary>
+        ///// set backround to control with animate
+        ///// </summary>
+        ///// <param name="item"></param>
+        ///// <param name="type"></param>
+        ///// <param name="FromColor"></param>
+        ///// <param name="ToColor"></param>
+        //private void SetThemeBackgroundToControl(object item, string type, Color? FromColor, Color? ToColor)
+        //{
+        //    ColorAnimation caBG = new ColorAnimation();
+        //    caBG.From = FromColor;
+        //    caBG.To = ToColor;
+        //    caBG.Duration = MainAnimTime;
+        //    PropertyPath colorTargetPathFG = new PropertyPath($"({type}.Background).(SolidColorBrush.Color)");
+        //    Storyboard ColorChangeStoryFG = new Storyboard();
+        //    Storyboard.SetTarget(caBG, item as DependencyObject);
+        //    Storyboard.SetTargetProperty(caBG, colorTargetPathFG);
+        //    ColorChangeStoryFG.Children.Add(caBG);
+        //    ColorChangeStoryFG.Begin();
+        //}
+        //#endregion
+
+
+
+        //#region controls mouse enter and leave in themes
+        ///// <summary>
+        ///// light button mouse Enter when is light theme
+        ///// </summary>
+        ///// <param name="navBtn"></param>
+        //public void LightButtonMouseEnter(Button navBtn) // light button mouse Enter when is light theme
+        //{
+        //    ca = new ColorAnimation();
+        //    ca.From = FromLightColorNavButton;
+        //    ca.To = ToLightColorNavButton;
+        //    ca.Duration = ButtonsMouseEnterAnimTime;
+
+        //    PropertyPath colorTargetPath = new PropertyPath($"(Button.Background).(SolidColorBrush.Color)");
+        //    Storyboard ColorChangeStory = new Storyboard();
+        //    Storyboard.SetTarget(ca, navBtn);
+        //    Storyboard.SetTargetProperty(ca, colorTargetPath);
+        //    ColorChangeStory.Children.Add(ca);
+        //    ColorChangeStory.Begin();
+        //}
+
+
+        ///// <summary>
+        ///// light button mouse Leave when is light theme
+        ///// </summary>
+        ///// <param name="navBtn"></param>
+        //public void LightButtonMouseLeave(Button navBtn) // light button mouse Leave when is light theme
+        //{
+        //    ca = new ColorAnimation();
+        //    ca.From = ToLightColorNavButton;
+        //    ca.To = FromLightColorNavButton;
+        //    ca.Duration = ButtonsMouseLeaveAnimTime;
+
+        //    PropertyPath colorTargetPath = new PropertyPath($"(Button.Background).(SolidColorBrush.Color)");
+        //    Storyboard ColorChangeStory = new Storyboard();
+        //    Storyboard.SetTarget(ca, navBtn);
+        //    Storyboard.SetTargetProperty(ca, colorTargetPath);
+        //    ColorChangeStory.Children.Add(ca);
+        //    ColorChangeStory.Begin();
+        //}
+
+
+        ///// <summary>
+        ///// dark button mouse enter when is dark theme
+        ///// </summary>
+        ///// <param name="navBtn"></param>
+        //public void DarkButtonMouseEnter(Button navBtn) // dark button mouse enter when is dark theme
+        //{
+        //    ca = new ColorAnimation();
+        //    ca.From = DarkButtonsColor;
+        //    ca.To = ToDarkColorNavButton;
+        //    ca.Duration = ButtonsMouseEnterAnimTime;
+
+        //    PropertyPath colorTargetPath = new PropertyPath($"(Button.Background).(SolidColorBrush.Color)");
+        //    Storyboard ColorChangeStory = new Storyboard();
+        //    Storyboard.SetTarget(ca, navBtn);
+        //    Storyboard.SetTargetProperty(ca, colorTargetPath);
+        //    ColorChangeStory.Children.Add(ca);
+        //    ColorChangeStory.Begin();
+        //}
+
+
+        ///// <summary>
+        ///// dark button mouse enter when is dark theme
+        ///// </summary>
+        ///// <param name="navBtn"></param>
+        //public void DarkButtonMouseLeave(Button navBtn) // dark button mouse enter when is dark theme
+        //{
+        //    ca = new ColorAnimation();
+        //    ca.From = ToDarkColorNavButton;
+        //    ca.To = DarkButtonsColor;
+        //    ca.Duration = ButtonsMouseLeaveAnimTime;
+
+        //    PropertyPath colorTargetPath = new PropertyPath($"(Button.Background).(SolidColorBrush.Color)");
+        //    Storyboard ColorChangeStory = new Storyboard();
+        //    Storyboard.SetTarget(ca, navBtn);
+        //    Storyboard.SetTargetProperty(ca, colorTargetPath);
+        //    ColorChangeStory.Children.Add(ca);
+        //    ColorChangeStory.Begin();
+        //}
+
+
+        ///// <summary>
+        ///// Handler Mouse Enter to TextBox. Change gradient in textbox
+        ///// </summary>
+        ///// <param name="tb"></param>
+        //public void TextBoxMouseEnter(TextBox tb)
+        //{
+        //    DoubleAnimation daBG = new DoubleAnimation();
+        //    daBG.From = 0.0;
+        //    daBG.To = 1.0;
+        //    daBG.Duration = TextBoxMouseEnterAnimTime;
+
+        //    PropertyPath colorTargetPath = new PropertyPath($"Background.GradientStops[0].Offset");
+        //    Storyboard ColorChangeStory = new Storyboard();
+        //    Storyboard.SetTarget(daBG, tb);
+        //    Storyboard.SetTargetProperty(daBG, colorTargetPath);
+        //    ColorChangeStory.Children.Add(daBG);
+        //    ColorChangeStory.Begin();
+        //}
+
+
+        ///// <summary>
+        ///// Handler Mouser Leave TextBox. Change gradient in textbox
+        ///// </summary>
+        ///// <param name="tb"></param>
+        //public void TextBoxMouseLeave(TextBox tb)
+        //{
+        //    DoubleAnimation daBG = new DoubleAnimation();
+        //    daBG.From = 1.0;
+        //    daBG.To = 0.0;
+        //    daBG.Duration = TextBoxMouseLeaveAnimTime;
+
+        //    PropertyPath colorTargetPath = new PropertyPath($"Background.GradientStops[0].Offset");
+        //    Storyboard ColorChangeStory = new Storyboard();
+        //    Storyboard.SetTarget(daBG, tb);
+        //    Storyboard.SetTargetProperty(daBG, colorTargetPath);
+        //    ColorChangeStory.Children.Add(daBG);
+        //    ColorChangeStory.Begin();
+        //}
+        //#endregion
+
+
+            //if (owner is Button)
+            //{
+            //    Button btn = (Button)owner;
+
+            //    ownerFGColor = ((SolidColorBrush)btn.Foreground).Color;
+            //    ownerBGColor = ((SolidColorBrush)btn.Background).Color;
+            //}
+
+            //else if (owner is TextBox)
+            //{
+            //    TextBox txt = (TextBox)owner;
+
+            //    ownerFGColor = ((SolidColorBrush)txt.Foreground).Color;
+            //    ownerBGColor = ((SolidColorBrush)txt.Background).Color;
+            //}
+
+            //else if (owner is Label)
+            //{
+            //    Label label = (Label)owner;
+
+            //    pickColorDialog.BackgroundColor.Visibility = Visibility.Hidden;
+            //    ownerFGColor = ((SolidColorBrush)label.Foreground).Color;
+            //}
+
+            //else if (owner is Grid)
+            //{
+            //    Grid grid = (Grid)owner;
+
+            //    pickColorDialog.ForegroundColor.Visibility = Visibility.Hidden;
+            //    ownerFGColor = ((SolidColorBrush)grid.Background).Color;
+            //}
+
+            //else if(owner is TextBlock)
+            //{
+            //    TextBlock txtBlock = (TextBlock)owner;
+
+            //    pickColorDialog.BackgroundColor.Visibility = Visibility.Hidden;
+            //    ownerFGColor = ((SolidColorBrush)txtBlock.Foreground).Color;
+            //}
+
+            //else if (owner is Border)
+            //{
+            //    Border brd = (Border)owner;
+
+            //    pickColorDialog.ForegroundColor.Visibility = Visibility.Hidden;
+            //    ownerBGColor = ((SolidColorBrush)brd.Background).Color;
+            //}
+
+            //else if(owner is ProgressBar)
+            //{
+            //    ProgressBar progressBar = (ProgressBar)owner;
+
+            //    ownerFGColor = ((SolidColorBrush)progressBar.Foreground).Color;
+            //    ownerBGColor = ((SolidColorBrush)progressBar.Background).Color;
+            //}
+
+            //else if(owner is ComboBox)
+            //{
+            //    ComboBox comboBox = (ComboBox)owner;
+
+            //    ownerFGColor = ((SolidColorBrush)comboBox.Foreground).Color;
+            //    ownerBGColor = (
+            //        (SolidColorBrush)Application.Current.Windows[0].Resources["ComboBox.MouseOver.Background"]
+            //        ).Color;
+            //}
+
+
+
+               //if (owner is Button)
+                //{
+                //    Button btn = (Button)owner;
+
+                //    btn.Background = new SolidColorBrush(selectedBG);
+                //    btn.Foreground = new SolidColorBrush(selectedFG);
+                //}
+
+                //else if (owner is TextBox)
+                //{
+                //    TextBox txt = (TextBox)owner;
+
+                //    txt.Background = new SolidColorBrush(selectedBG);
+                //    txt.Foreground = new SolidColorBrush(selectedFG);
+                //    txt.CaretBrush = new SolidColorBrush(selectedFG);
+                //}
+                //else if (owner is Label)
+                //{
+                //    Label lb = (Label)owner;
+
+                //    lb.Foreground = new SolidColorBrush(selectedFG);
+                //}
+
+                //else if (owner is Grid)
+                //{
+                //    Grid grid = (Grid)owner;
+
+                //    grid.Background = new SolidColorBrush(selectedBG);
+                //}
+
+                //else if (owner is TextBlock)
+                //{
+                //    TextBlock txtBlock = (TextBlock)owner;
+
+                //    txtBlock.Foreground = new SolidColorBrush(selectedFG);
+                //}
+
+                //else if (owner is Border)
+                //{
+                //    Border brd = (Border)owner;
+
+                //    brd.Background = new SolidColorBrush(selectedBG);
+                //}
+
+                //else if (owner is ProgressBar)
+                //{
+                //    ProgressBar progressBar = (ProgressBar)owner;
+
+                //    progressBar.Background = new SolidColorBrush(selectedBG);
+                //    progressBar.Foreground = new SolidColorBrush(selectedFG);
+                //}
+
+                //else if(owner is ComboBox)
+                //{
+                //    // only for servers text box
+                //    ComboBox comboBox = (ComboBox)owner;
+                //    Application.Current.Windows[0].Resources["ComboBox.MouseOver.Background"] = 
+                //                                new SolidColorBrush(selectedBG);
+                //    comboBox.Foreground = new SolidColorBrush(selectedFG);
+                //}
+
+
+            //if(control is Button)
+            //{
+            //    Button btn = (Button)control;
+            //    FG = ((SolidColorBrush)btn.Foreground).Color;
+            //    BG = ((SolidColorBrush)btn.Background).Color;
+            //}
+
+            //if(control is Grid)
+            //{
+            //    Grid grid = (Grid)control;
+            //    BG = ((SolidColorBrush)grid.Background).Color;
+            //}
+
+            //if(control is TextBox)
+            //{
+            //    TextBox txtBox = (TextBox)control;
+            //    FG = ((SolidColorBrush)txtBox.Foreground).Color;
+            //    BG = ((SolidColorBrush)txtBox.Background).Color;
+            //}
+
+            //if(control is TextBlock) 
+            //{
+            //    TextBlock txtBlock = (TextBlock)control;
+            //    FG = ((SolidColorBrush)txtBlock.Foreground).Color;
+            //}
+
+            //if(control is Label)
+            //{
+            //    Label lbl = (Label)control;
+            //    FG = ((SolidColorBrush)lbl.Foreground).Color;
+            //}
+
+            //if(control is Border)
+            //{
+            //    Border brd = (Border)control;
+            //    BG = ((SolidColorBrush)brd.Background).Color;
+            //}
+
+            //if(control is ProgressBar)
+            //{
+            //    ProgressBar brd = (ProgressBar)control;
+            //    FG = ((SolidColorBrush)brd.Foreground).Color;
+            //    BG = ((SolidColorBrush)brd.Background).Color;
+            //}
+
+
+
+               //string PlayersOnServerText = new LanguagesHandler(InfoClass.InterfaceLang).Words[27];
+                //mw.Dispatcher.Invoke(() =>
+                //{
+                //    if (mw.ServersBox.SelectedIndex == 0) // temporary check because we have only 1 server
+                //    {
+                //        Dictionary<string, string[]> serversInfo = Utils.GetAllItemsFromJson<string, string[]>
+                //                    (Directory.GetCurrentDirectory() + '\\' + InfoClass.DataDirectory 
+                //                    + '\\' + InfoClass.ServersDataFile);
+                //
+                //        string ip = serversInfo["Server 1"][0]; // contains ip server
+                //        ushort port = ushort.Parse(serversInfo["Server 1"][1]); // contains port server
+                //
+                //        ushort currentPlayers = Utils.GetPlayersInSAMPServer(ip, port);
+                //        ushort maxPlayers = Utils.GetMaxPlayersInSAMPServer(ip, port);
+                //
+                //        mw.PlayersTextBlock.Text = $"{PlayersOnServerText}: {currentPlayers}/{maxPlayers}";
+                //    }
+                //    else
+                //    {
+                //        mw.PlayersTextBlock.Text = $"{PlayersOnServerText}: 1000/1000";
+                //    }
+                //});
+
+
+                            //if (e.Key == Key.F1 && Keyboard.IsKeyDown(Key.LeftCtrl) && !mw.NickNameBox.IsFocused)
+            //{
+            //    mw.NickNameBox.Focus();
+            //    mw.NickNameBox.CaretIndex = mw.NickNameBox.Text.Length;
+            //}
+            //if (e.Key == Key.Escape)
+            //{
+            //    mwHandlers.CloseButtonHnd();
+            //}
+            //if (e.Key == Key.Q && !mw.NickNameBox.IsFocused)
+            //{
+            //    mwHandlers.MinimizedButtonHnd(mw);
+            //}
+            //if (e.Key == Key.F1 && !Keyboard.IsKeyDown(Key.LeftCtrl))
+            //{
+            //    mwHandlers.SettingsButtonHnd(mw);
+            //}
+            //if (e.Key == Key.F2)
+            //{
+            //    mwHandlers.UserProfilesButtonHnd(mw);
+            //}
+            //if (e.Key == Key.F3)
+            //{
+            //    await mwHandlers.SocialMediaButtonHnd(mw.NavBarCabinetButton, mw);
+            //}
+            //if (e.Key == Key.F4)
+            //{
+            //    await mwHandlers.SocialMediaButtonHnd(mw.NavBarForumButton, mw);
+            //}
+            //if (e.Key == Key.F5)
+            //{
+            //    await mwHandlers.SocialMediaButtonHnd(mw.NavBarTechSupportButton, mw);
+            //}
+            //if (e.Key == Key.F6)
+            //{
+            //    await mwHandlers.SocialMediaButtonHnd(mw.DiscordButton, mw);
+            //}
+            //if (e.Key == Key.F7)
+            //{
+            //    await mwHandlers.SocialMediaButtonHnd(mw.YoutubeButton, mw);
+            //}
+            //if (e.Key == Key.F8)
+            //{
+            //    await mwHandlers.SocialMediaButtonHnd(mw.VkButton, mw);
+            //}
+            //if (e.Key == Key.G && Keyboard.IsKeyDown(Key.LeftShift) && !mw.NickNameBox.IsFocused)
+            //{
+            //    mwHandlers.ToGameButtonClickHnd(mw);
+            //}
+            //if (e.Key == Key.R && Keyboard.IsKeyDown(Key.LeftShift) && !mw.NickNameBox.IsFocused)
+            //{
+            //    await mwHandlers.RefreshCheckConnetionBorderButtonHnd(mw);
+            //}
+            //if (e.Key == Key.Right && !mw.NickNameBox.IsFocused)
+            //{
+            //    ChangeNewsRight(mw.CurrentNewsEllipse?.Name ?? mw.Fvth5.Name);
+            //}
+            //if (e.Key == Key.Left && !mw.NickNameBox.IsFocused)
+            //{
+            //    ChangeNewsLeft(mw.CurrentNewsEllipse?.Name ?? mw.Frst1.Name);
+            //}
+
+
+                                    //if (mw.ServersContainerListBox.SelectedIndex == 0)
+                        //{
+                        //    lam();
+                        //    mw.PickedServer = (ServerContainer)mw.ServersContainerListBox.Items[0];
+                        //    mw.PickedServer.ServerPicked = true;
+                        //    MTAServer server = new MTAServer();
+                        //    int playersCount = server.GetPlayersCount(0);
+                        //    mw.PickedServer.CurrentPlayersCount = (uint)playersCount;
+                        //}
+                        //else if (mw.ServersContainerListBox.SelectedIndex == 1)
+                        //{
+                        //    lam();
+                        //    mw.PickedServer = (ServerContainer)mw.ServersContainerListBox.Items[1];
+                        //    mw.PickedServer.ServerPicked = true;
+                        //    MTAServer server = new MTAServer();
+                        //    int playersCount = server.GetPlayersCount(0);
+                        //    mw.PickedServer.CurrentPlayersCount = (uint)playersCount;
+                        //}
+                        //    string PlayersOnServerText = LanguagesTexts.AllWords[27];
+                        //    if (mw.ServersBox.SelectedIndex == 0) // temporary check because we have only 1 server
+                        //    {
+                        //        MTAServer server = new MTAServer();
+                        //        int playersCount = server.GetPlayersCount(0);
+                        //        mw.PlayersTextBlock.Text = $"{PlayersOnServerText}: {playersCount}/1000";
+                        //        server.Dispose();
+                        //    }
+                        //    else
+                        //    {
+                        //        mw.PlayersTextBlock.Text = $"{PlayersOnServerText}: 1000/1000";
+                        //    }
+                        //});
+
+
+
+
+
+                                //Color GetMouseEnterColorByControl(Control c)
+        //{
+        //    Color colorBtn = ((SolidColorBrush)c.Background).Color;
+        //    byte alpha  = colorBtn.A;
+        //    byte red    = colorBtn.R;
+        //    byte green  = colorBtn.G;
+        //    byte blue   = colorBtn.B;
+
+        //    Color targetColor = default;
+        //    if (alpha > 150)
+        //        targetColor = Color.FromArgb(150, red, green, blue);
+        //    else
+        //        targetColor = Color.FromArgb(alpha, red, green, blue);
+
+        //    return targetColor;
+        //}
+
+
+        //Color GetMouseLeaveColorByControl(Control c)
+        //{
+        //    Color colorBtn = ((SolidColorBrush)c.Background).Color;
+        //    byte alpha  = colorBtn.A;
+        //    byte red    = colorBtn.R;
+        //    byte green  = colorBtn.G;
+        //    byte blue   = colorBtn.B;
+
+        //    Color targetColor = default;
+        //    if (alpha >= 150)
+        //        targetColor = Color.FromArgb(255, red, green, blue);
+        //    else
+        //        targetColor = Color.FromArgb(alpha, red, green, blue);
+
+        //    return targetColor;
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        //// check nickname on valid example correct nickname: Test_Test OR Test_Teest_Test
+                //// if some issues in nick, return false, else return true
+                //if(nickname.Length > 20)
+                //{
+                //    return false;
+                //}
+
+                //foreach (char ch in nickname)
+                //{
+                //    if (Char.IsDigit(ch)) // nickname can't contains digits
+                //    {
+                //        return false;
+                //    }
+                //}
+
+                //if (NickNameHasSpecialSymbols(nickname)) // nickname can contain ONLY alphabet and _ symbol
+                //{
+                //    return false;
+                //}
+
+                //if (StringHelper.HasNonAsciiChars(nickname))
+                //{
+                //    return false;
+                //}
+
+                //if (!nickname.Contains('_')) // nickname must contain _ char at least 1
+                //{
+                //    return false;
+                //}
+
+                //else
+                //{
+                //    // max under scope in nick name = 3 = Name_Double_Surname
+                //    string[] splited_nick = nickname.Split('_');
+
+                //    if (splited_nick.Length <= 3 && splited_nick.Length > 1)
+                //    {
+                //        ushort countUppers = 0; // var for count upper chars in part of nickname
+                //        foreach (string sn in splited_nick)
+                //        {
+                //            if (sn.Length <= 1) return false;
+
+                //            // if first char of part of name isnt upper - return false
+                //            if (!char.IsUpper(sn[0]) || (char.IsUpper(sn[0]) && char.IsUpper(sn[1]))) 
+                //            {
+                //                return false;
+                //            }
+                //            foreach (char ch in sn)
+                //            {
+                //                if (char.IsUpper(ch))
+                //                {
+                //                    countUppers++;
+                //                    if(countUppers > 2) // in name cannot be more than 2 upper letters
+                //                    {
+                //                        return false;
+                //                    }
+                //                }
+                //            }
+                //            countUppers = 0;
+                //        }
+                //    }
+                //    else
+                //        return false;
+                //}
+                //return true; // if all checks didnt return false. Method return true. Nickname is valid

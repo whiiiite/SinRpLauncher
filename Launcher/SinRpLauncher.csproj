@@ -1,0 +1,108 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <BaseOutputPath>bin</BaseOutputPath>
+    <Platforms>AnyCPU;x86</Platforms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\Montserrat-Light.ttf" />
+    <None Remove="Fonts\Montserrat-SemiBold.ttf" />
+    <None Remove="images\circgrad.png" />
+    <None Remove="images\mta.ico" />
+    <None Remove="images\test.png" />
+    <None Remove="info.txt" />
+    <None Remove="tasks.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="{215d64d2-031c-33c7-96e3-61794cd1ee61}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>215d64d2-031c-33c7-96e3-61794cd1ee61</Guid>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls" Version="7.1.2" />
+    <PackageReference Include="MonoTorrent" Version="2.0.7" />
+    <PackageReference Include="SAMPQuery" Version="1.0.2" />
+    <PackageReference Include="Unnoficial.Microsoft.Expression.Drawing" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Release\net6.0-windows\Images\test.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="C:\Users\Asus\.nuget\packages\microsoft.visualstudio.threading.analyzers\17.3.44\build\AdditionalFiles\vs-threading.LegacyThreadSwitchingMembers.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Remove="C:\Users\Asus\.nuget\packages\microsoft.visualstudio.threading.analyzers\17.3.44\build\AdditionalFiles\vs-threading.MainThreadAssertingMethods.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="CustomDialogWindow.xaml.cs" />
+    <Compile Remove="Handlers\HotKeysHandlers\CustomDlgWinHotKeysHandler.cs" />
+    <Compile Remove="Loaders\CustomDialogWindowLoader.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="CustomDialogWindow.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\x86\Release\net6.0-windows\data\MainWndColorThemeDat.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CDialogWindow">
+      <HintPath>bin\x86\Debug\net6.0-windows\CDialogWindow.dll</HintPath>
+    </Reference>
+    <Reference Include="ED">
+      <HintPath>bin\x86\Debug\net6.0-windows\ED.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\Montserrat-Light.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\circgrad.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\mta.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="images\est.PNG">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="images\nightThm.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="images\nightThmPic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="images\settingsimage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="images\ThemeChangePic.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
