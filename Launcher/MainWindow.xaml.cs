@@ -260,10 +260,6 @@ namespace Launcher
                 Utils.ShowMessageBoxErrorIfNotDebug(ex);
                 LogsSys.WriteErrorLog(_Utils.GetErrorLogPath(), sender, ex);
             }
-            finally
-            {
-                GC.Collect();
-            }
         }
 
 
